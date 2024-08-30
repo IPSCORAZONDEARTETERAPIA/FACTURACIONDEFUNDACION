@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUNDACIÓN CORAZÓN DE ARTE TERAPIA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sección de Login -->
+    <section id="login-section">
+        <div class="login-container">
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Usuario" required>
+                <input type="password" id="password" placeholder="Contraseña" required>
+                <button type="button" onclick="login()">Iniciar Sesión</button>
+            </form>
+            <p id="login-message"></p>
+        </div>
+    </section>
+
+    <!-- Sección Principal -->
+    <section id="main-content" class="hidden">
+        <!-- Barra Lateral -->
+        <aside id="sidebar">
+            <div class="sidebar-item" onclick="showSection('billing')">Cobro</div>
+            <div class="sidebar-item admin-only" onclick="showSection('admin')">Administrar Productos</div>
+            <div class="sidebar-item" onclick="showSection('invoices')">Facturas Generadas</div>
+            <div class="sidebar-item" onclick="logout()">
+                <img src="https://www.iconfinder.com/data/icons/typicons-2/24/log-out-512.png" alt="Log Out">
+            </div>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main id="content">
+            <!-- Sección de Administración de Productos -->
+            <section id="admin-section" class="hidden">
+                <h2>Administrar Productos</h2>
+                <form id="product-form">
+                    <input type="text" id="product-name" placeholder="Nombre del Producto" required>
+                    <input type="number" step="0.01" id="product-price" placeholder="Precio del Producto" required>
+                    <button type="button" id="create-product-button" onclick="createProduct()">Crear Producto</button>
+                    <button type="button" id="edit-product-button" style="display: none;" onclick="updateProduct()">Actualizar Producto</button>
+                </form>
+                <h3>Lista de Productos</h3>
+                <table id="product-list">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+
+            <!-- Sección de Cobro -->
+            <section id="billing-section">
+                <h2>Formulario de Cobro</h2>
+                <form id="billing-form">
+                    <input type="text" id="client-name" placeholder="Nombre del Cliente" required>
+                    <input type="text" id="client-id" placeholder="ID del Cliente" required>
+                    <input type="number" id="client-age" placeholder="Edad" required>
+                    <input type="date" id="payment-date" required>
+                    <select id="payment-method" required>
+                        <option value="" disabled selected>Seleccione Método de Pago</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Nequi">Nequi</option>
+                    </select>
+                    <textarea id="observations" placeholder="Observaciones"></textarea>
+                    <select id="product-select" required>
+                        <option value="" disabled selected>Selecciona un Producto</option>
+                    </select>
+                    <input type="number" id="quantity" placeholder="Cantidad" required>
+                    <button type="button" onclick="generateInvoice()">Generar Factura</button>
+                </form>
+                <h3>Facturas Generadas</h3>
+                <div id="invoice-list"></div>
+                <table id="invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre del Cliente</th>
+                            <th>Valor Pagado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+
+            <!-- Sección de Facturas Generadas -->
+            <section id="invoices-section" class="hidden">
+                <h2>Facturas Generadas</h2>
+                <div id="invoice-list"></div>
+            </section>
+        </main>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
